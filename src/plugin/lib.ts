@@ -1,3 +1,8 @@
+/**
+ * Type guard that checks if a node supports children
+ * @param node
+ * @returns node
+ */
 export function supportsChildren(
   node: SceneNode
 ): node is FrameNode | ComponentNode | InstanceNode | BooleanOperationNode {
@@ -16,6 +21,11 @@ export type Counts = {
   words: number;
 };
 
+/**
+ * Get Counts object form a list of nodes
+ * @param nodes
+ * @returns Counts
+ */
 export function getCountsForNodes(nodes: SceneNode[]): Counts {
   const textNodes = findAllTextNodesForNodes(nodes);
   const strings = textNodesToStrings(textNodes);
