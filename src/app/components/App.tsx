@@ -25,11 +25,7 @@ const App = ({}) => {
 
   return (
     <>
-      <h2>Word Counter</h2>
-
-      <h3>{numSelected} text layers selected</h3>
-
-      <table>
+      <table className="counts-table">
         <tbody>
           <tr>
             <td>Characters</td>
@@ -45,6 +41,8 @@ const App = ({}) => {
           </tr>
         </tbody>
       </table>
+
+      <p className="layer-count">{numSelected} text layers selected</p>
     </>
   );
 };
