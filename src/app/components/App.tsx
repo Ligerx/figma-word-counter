@@ -30,18 +30,20 @@ const App = ({}) => {
       <h3>{numSelected} text layers selected</h3>
 
       <table>
-        <tr>
-          <td>Characters</td>
-          <td>{characters}</td>
-        </tr>
-        <tr>
-          <td>Characters excluding spaces</td>
-          <td>{charactersNoSpaces}</td>
-        </tr>
-        <tr>
-          <td>Words</td>
-          <td>{words}</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>Characters</td>
+            <td>{characters}</td>
+          </tr>
+          <tr>
+            <td>Characters excluding spaces</td>
+            <td>{charactersNoSpaces}</td>
+          </tr>
+          <tr>
+            <td>Words</td>
+            <td>{words}</td>
+          </tr>
+        </tbody>
       </table>
     </>
   );
