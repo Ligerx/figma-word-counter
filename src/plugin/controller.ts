@@ -1,26 +1,22 @@
+import { getCountsForNodes } from "./lib";
+
 figma.showUI(__html__);
 
-figma.ui.onmessage = (msg) => {
-    if (msg.type === 'create-rectangles') {
-        const nodes = [];
+figma.on("selectionchange", () => {
+  postCountsMessage(figma.currentPage.selection);
+});
 
-        for (let i = 0; i < msg.count; i++) {
-            const rect = figma.createRectangle();
-            rect.x = i * 150;
-            rect.fills = [{type: 'SOLID', color: {r: 1, g: 0.5, b: 0}}];
-            figma.currentPage.appendChild(rect);
-            nodes.push(rect);
-        }
+figma.on("currentpagechange", () => {
+  postCountsMessage(figma.currentPage.selection);
+});
 
-        figma.currentPage.selection = nodes;
-        figma.viewport.scrollAndZoomIntoView(nodes);
-
-        // This is how figma responds back to the ui
-        figma.ui.postMessage({
-            type: 'create-rectangles',
-            message: `Created ${msg.count} Rectangles`,
-        });
-    }
-
-    figma.closePlugin();
-};
+/**
+ * Post message to UI with the most up to date word and character counts.
+ * @param nodes
+ */
+function postCountsMessage(nodes: readonly SceneNode[]) {
+  // Figma returns `readonly SceneNode[]` from figma.currentPage.selection,
+  // so we manually copy the array to create a mutable version of it.
+  const counts = getCountsForNodes([...nodes]);
+  figma.ui.postMessage(counts);
+}

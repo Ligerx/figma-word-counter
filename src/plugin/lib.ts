@@ -1,7 +1,7 @@
 /**
- * Type guard that checks if a node supports children
- * @param node
- * @returns node
+ * Type guard that checks if a node supports children.
+ * @param node The node to check if it supports children.
+ * @returns If `node` supports children or not.
  */
 export function supportsChildren(
   node: SceneNode
@@ -19,6 +19,7 @@ export type Counts = {
   characters: number;
   charactersNoSpaces: number;
   words: number;
+  numSelected: number;
 };
 
 /**
@@ -54,7 +55,8 @@ function getCounts(strings: string[]): Counts {
   return {
     characters: countCharacters(strings),
     charactersNoSpaces: countCharactersNoSpaces(strings),
-    words: countWords(strings)
+    words: countWords(strings),
+    numSelected: strings.length
   };
 }
 

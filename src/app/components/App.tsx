@@ -1,48 +1,50 @@
-import * as React from 'react';
-import '../styles/ui.css';
+import * as React from "react";
+import { Counts } from "../../plugin/lib";
+import "../styles/ui.css";
 
-declare function require(path: string): any;
+function useMessageListenerEffect(setCounts) {
+  React.useEffect(() => {
+    window.onmessage = event => {
+      setCounts(event.data.pluginMessage);
+    };
+  }, []);
+}
+
+const defaultCounts: Counts = {
+  characters: 0,
+  charactersNoSpaces: 0,
+  words: 0,
+  numSelected: 0
+};
 
 const App = ({}) => {
-    const textbox = React.useRef<HTMLInputElement>(undefined);
+  const [counts, setCounts] = React.useState<Counts>(defaultCounts);
+  const { characters, charactersNoSpaces, words, numSelected } = counts;
 
-    const countRef = React.useCallback((element: HTMLInputElement) => {
-        if (element) element.value = '5';
-        textbox.current = element;
-    }, []);
+  useMessageListenerEffect(setCounts);
 
-    const onCreate = React.useCallback(() => {
-        const count = parseInt(textbox.current.value, 10);
-        parent.postMessage({pluginMessage: {type: 'create-rectangles', count}}, '*');
-    }, []);
+  return (
+    <>
+      <h2>Word Counter</h2>
 
-    const onCancel = React.useCallback(() => {
-        parent.postMessage({pluginMessage: {type: 'cancel'}}, '*');
-    }, []);
+      <h3>{numSelected} text layers selected</h3>
 
-    React.useEffect(() => {
-        // This is how we read messages sent from the plugin controller
-        window.onmessage = (event) => {
-            const { type, message } = event.data.pluginMessage;
-            if (type === 'create-rectangles') {
-                console.log(`Figma Says: ${message}`);
-            };
-        }
-    }, []);
-
-    return (
-        <div>
-            <img src={require('../assets/logo.svg')} />
-            <h2>Rectangle Creator</h2>
-            <p>
-                Count: <input ref={countRef} />
-            </p>
-            <button id="create" onClick={onCreate}>
-                Create
-            </button>
-            <button onClick={onCancel}>Cancel</button>
-        </div>
-    );
+      <table>
+        <tr>
+          <td>Characters</td>
+          <td>{characters}</td>
+        </tr>
+        <tr>
+          <td>Characters excluding spaces</td>
+          <td>{charactersNoSpaces}</td>
+        </tr>
+        <tr>
+          <td>Words</td>
+          <td>{words}</td>
+        </tr>
+      </table>
+    </>
+  );
 };
 
 export default App;
