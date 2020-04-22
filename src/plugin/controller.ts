@@ -1,6 +1,6 @@
 import { getCountsForNodes } from "./lib";
 
-figma.showUI(__html__, { width: 240, height: 400 });
+figma.showUI(__html__, { width: 240, height: 216 });
 
 // Send counts on init. This occurs before any selectionchange or currentpagechange events fire.
 postCountsMessage(figma.currentPage.selection);

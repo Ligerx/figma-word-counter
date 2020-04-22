@@ -28,5 +28,15 @@ body {
 .layer-count {
   font-size: 14px;
   color: #5e6a75;
+  margin-top: 12px;
+}
+
+.github {
+  text-align: center;
+  font-size: 12px;
   margin-top: 16px;
+}
+
+.github a:link {
+  color: #5e6a75;
 }
