@@ -1,6 +1,6 @@
 {
     "name": "Word Counter",
-    "id": "00000000",
+    "id": "835015945650515753",
     "api": "1.0.0",
     "main": "dist/code.js",
     "ui": "dist/ui.html"
