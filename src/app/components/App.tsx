@@ -45,7 +45,7 @@ const App = ({}) => {
       <p className="layer-count">{numSelected} text layers selected</p>
 
       <div className="github">
-        <a href="https://github.com/Ligerx/word-counter" target="_blank">
+        <a href="https://github.com/Ligerx/figma-word-counter" target="_blank">
           GitHub
         </a>
       </div>
